@@ -23,6 +23,7 @@
  ****************************************************************************/
 
 #include "AppDelegate.h"
+#include"SimpleAudioEngine.h"
 #include "Classes/Scene/HelloWorldScene.h"
 
 // #define USE_AUDIO_ENGINE 1
@@ -123,6 +124,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // run
     director->runWithScene(scene);
 
+	SimpleAudioEngine::getInstance()->perLoadBackgroundMusic("1.mp3");
     return true;
 }
 
