@@ -23,9 +23,14 @@
  ****************************************************************************/
 
 #include "AppDelegate.h"
+<<<<<<< HEAD
 #include"SimpleAudioEngine.h"
 #include "Classes/Scene/HelloWorldScene.h"
 
+=======
+#include "Scene/HelloWorldScene.h"
+#include "SimpleAudioEngine.h"
+>>>>>>> 4c18cfd936bc48912091b392b5b2e9814b7cb8cd
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
 
@@ -66,7 +71,7 @@ AppDelegate::~AppDelegate()
 void AppDelegate::initGLContextAttrs()
 {
     // set OpenGL context attributes: red,green,blue,alpha,depth,stencil,multisamplesCount
-    GLContextAttrs glContextAttrs = {8, 8, 8, 8, 24, 8};						//еп
+    GLContextAttrs glContextAttrs = {8, 8, 8, 8, 24, 8, 0};
 
     GLView::setGLContextAttrs(glContextAttrs);
 }
@@ -84,7 +89,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-        glview = GLViewImpl::createWithRect("cpp-program", cocos2d::Rect(0, 0, 1000,600));
+        glview = GLViewImpl::createWithRect("cpp-program", cocos2d::Rect(0, 0, 1800,800));
 #else
         glview = GLViewImpl::create("cpp-program");
 #endif
@@ -124,7 +129,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // run
     director->runWithScene(scene);
 
+<<<<<<< HEAD
 	SimpleAudioEngine::getInstance()->perLoadBackgroundMusic("1.mp3");
+=======
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("1.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("2.mp3");
+
+
+>>>>>>> 4c18cfd936bc48912091b392b5b2e9814b7cb8cd
     return true;
 }
 
@@ -132,6 +144,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
 
+	SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 #if USE_AUDIO_ENGINE
     AudioEngine::pauseAll();
 #elif USE_SIMPLE_AUDIO_ENGINE
@@ -144,6 +157,7 @@ void AppDelegate::applicationDidEnterBackground() {
 void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 
+	SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 #if USE_AUDIO_ENGINE
     AudioEngine::resumeAll();
 #elif USE_SIMPLE_AUDIO_ENGINE
